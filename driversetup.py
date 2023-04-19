@@ -1,3 +1,4 @@
+import platform
 from selenium import webdriver
 
 def driversetup():
@@ -17,7 +18,11 @@ def driversetup():
     options.add_argument("--incognito")
     options.add_argument("--disable-blink-features=AutomationControlled")
 
-    driver = webdriver.Chrome(options=options)
+    execdriver = 'chromedriver'
+    if platform.system() == "Windows":
+        execdriver = 'chromedriver.exe'
+
+    driver = webdriver.Chrome(execdriver, options=options)
 
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined});")
 
